@@ -283,3 +283,25 @@ sudo vim /etc/mkinitcpio.conf
 ```bash
 sudo mkinitcpio -P
 ```
+
+## 软件
+```bash
+sudo pacman -S okular
+sudo pacman -S flameshot
+sudo pacman -S telegram-desktop
+yay -S linuxqq
+yay -S wechat-uos
+sudo pacman -S discord
+yay -S wemeet-bin
+sudo pacman -S libreoffice-still libreoffice-still-zh-cn
+sudo pacman -S typora pandoc
+yay -S uxplay-git
+sudo systemctl start avahi-daemon.service
+sudo pacman -S kdeconnect sshfs
+sudo pacman -S mpv
+yay -S yesplaymusic
+sudo pacman -S shotcut
+sudo pacman -S gimp
+sudo pacman -S blender
+yay -S figma-linux
+```
