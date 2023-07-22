@@ -42,6 +42,7 @@ cfdisk /dev/nvme0n1
 mkfs.fat -F32 /dev/nvme0n1p1 # 格式化 EFI 分区
 mkswap /dev/nvme0n1p2 # 格式化 Swap 分区
 mkfs.btrfs -L myArch /dev/nvme0n1p3 # 格式化 Btrfs 分区
+mount -t btrfs -o compress=zstd /dev/sdxn /mnt
 btrfs subvolume create /mnt/@ # 创建 / 目录子卷
 btrfs subvolume create /mnt/@home # 创建 /home 目录子卷
 umount /mnt
@@ -167,6 +168,8 @@ export EDITOR='vim'
 ```bash
 useradd -m -G wheel -s /bin/bash myusername
 passwd myusername
+EDITOR=vim visudo # 这里需要显式的指定编辑器，因为上面的环境变量还未生效
+ #%wheel ALL=(ALL:ALL) ALL
 ```
 
 ## 开启 32 位支持库与 Arch Linux 中文社区仓库
@@ -198,11 +201,6 @@ systemctl enable sddm
 systemctl start sddm
 ```
 
-## 开启蓝牙
-```bash
-sudo systemctl enable --now bluetooth
-```
-
 ## 必备1
 ```bash
 sudo pacman -S ntfs-3g # 使系统可以识别 NTFS 格式的硬盘
@@ -215,6 +213,11 @@ sudo pacman -S gwenview # 图片查看器
 sudo pacman -S fcitx5-im fcitx5-chinese-addons # 输入法
 sudo pacman -S archlinuxcn-keyring 
 sudo pacman -S yay
+```
+
+## 开启蓝牙
+```bash
+sudo systemctl enable --now bluetooth
 ```
 
 ## 代理
@@ -295,8 +298,11 @@ sudo pacman -S discord
 yay -S wemeet-bin
 sudo pacman -S libreoffice-still libreoffice-still-zh-cn
 sudo pacman -S typora pandoc
+# uxplay
 yay -S uxplay-git
 sudo systemctl start avahi-daemon.service
+gst-plugins-good
+
 sudo pacman -S kdeconnect sshfs
 sudo pacman -S mpv
 yay -S yesplaymusic
